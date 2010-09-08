@@ -1,0 +1,1 @@
+A simple example how one could use MongoDB with an Morphia fasade to easily (and awesomely) implement MongoDAO's and even use them later as POJOs - which would enable super-simple using them in GWT apps :-)

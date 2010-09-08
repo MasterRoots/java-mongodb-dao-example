@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+    wget http://morphia.googlecode.com/files/morphia-0.96-SNAPSHOT.jar
+    mvn install:install-file \
+        -Dfile=morphia-0.96-SNAPSHOT.jar \
+        -DgroupId=com.google.code \
+        -DartifactId=morphia \
+        -Dversion=0.96-SNAPSHOT \
+        -Dpackaging=jar \
+        -DgeneratePom=true
+
+    wget http://github.com/downloads/mongodb/mongo-java-driver/mongo-2.1.jar
+
+    -->
+
+    <groupId>mongo-testing</groupId>
+    <artifactId>mongo-testing</artifactId>
+    <version>1.0</version>
+
+    <developers>
+        <developer>
+            <id>Bat</id>
+            <name>Lukasz Bachman</name>
+            <email>lukasz.bachman@xsolve.pl</email>
+            <url>http://xsolve.pl</url>
+            <organization>XSolve</organization>
+            <organizationUrl>http://xsolve.pl</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>Szulinio</id>
+            <name>Tomasz Szulik</name>
+            <email>tomasz.szulik@xsolve.pl</email>
+            <url>http://xsolve.pl</url>
+            <organization>XSolve</organization>
+            <organizationUrl>http://xsolve.pl</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>Ktoso</id>
+            <name>Konrad Malawski</name>
+            <email>konrad.malawski@xsolve.pl</email>
+            <url>http://xsolve.pl</url>
+            <organization>XSolve</organization>
+            <organizationUrl>http://xsolve.pl</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+    </developers>
+
+    <!-- Properties -->
+    <properties>
+        <app.name>mongo-testing</app.name>
+
+        <mongo.host>127.0.0.1</mongo.host>
+        <mongo.port>27017</mongo.port>
+
+        <mongo.user></mongo.user>
+        <mongo.pass></mongo.pass>
+        <mongo.dbName>test</mongo.dbName>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>archiva.internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://10.254.254.61:8081/archiva/repository/internal/</url>
+            <uniqueVersion>true</uniqueVersion>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+
+        <repository>
+            <id>morphia</id>
+            <name>morphia</name>
+            <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>3.0.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>org.springframework.security.config</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>org.springframework.security.web</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>org.springframework.security.taglibs</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <!-- Spring aspectj -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.aspects</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+
+        <!-- MongoDB -->
+        <!-- 2.1 is required by morphia 0.96 -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <!-- Morphia for MongoDB -->
+        <dependency>
+            <groupId>com.google.code</groupId>
+            <artifactId>morphia</artifactId>
+            <version>0.96-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Optional Jars (for certain Morphia features) but required by maven for bulding. -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>[2.1_3,)</version>
+            <type>jar</type>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.proxytoys</groupId>
+            <artifactId>proxytoys</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+            <optional>true</optional>
+        </dependency>
+
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Build-specific configuration -->
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <!-- Filtering resources -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <!-- PLUGINS -->
+        <plugins>
+            <!-- Setting built-in java compiler properties -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                <artifactId>maven-svn-revision-number-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <entries>
+                        <entry>
+                            <prefix>prefix</prefix>
+                        </entry>
+                    </entries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Profiles -->
+    <profiles>
+        <!-- TEST profile -->
+        <profile>
+            <id>test-localhost</id>
+            <properties>
+                <mongo.host>127.0.0.1</mongo.host>
+                <mongo.port>27017</mongo.port>
+
+                <!--<mongo.user>test</mongo.user>-->
+                <!--<mongo.pass>test</mongo.pass>-->
+                <mongo.dbName>${app.name}-test</mongo.dbName>
+            </properties>
+        </profile>
+
+        <!-- DEMO profile -->
+        <profile>
+            <id>demo-73</id>
+            <properties>
+                <mongo.host>10.254.254.73</mongo.host>
+                <mongo.port>27017</mongo.port>
+
+                <!--<mongo.user>demo</mongo.user>-->
+                <!--<mongo.pass>demodevel</mongo.pass>-->
+                <mongo.dbName>${app.name}-demo</mongo.dbName>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
